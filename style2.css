@@ -1,0 +1,250 @@
+body {
+    background-color: black;
+    color: red;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+header {
+    padding: 20px;
+    border-bottom: 2px solid red;
+}
+
+input {
+    padding: 10px;
+    width: 60%;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #222;
+}
+
+nav ul li {
+    position: relative;
+    padding: 10px 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+nav ul li:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    padding: 10px;
+    list-style: none;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    z-index: 100;
+}
+
+.dropdown-menu li {
+    padding: 5px;
+}
+
+.dropdown-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #444;
+}
+
+/* Profile Container */
+.profile-container {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+/* Profile Icon (Circular) */
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #444;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+/* Dropdown Menu */
+.profile-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #222;
+    border-radius: 5px;
+    width: 180px;
+    text-align: left;
+    list-style: none;
+    padding: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Profile Name */
+.profile-name {
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* Dropdown List Items */
+.profile-menu li {
+    padding: 10px;
+}
+
+.profile-menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 5px 15px;
+}
+
+.profile-menu li:hover {
+    background-color: #444;
+}
+
+/* Dropdown Line */
+.profile-menu hr {
+    border: none;
+    height: 1px;
+    background-color: #444;
+    margin: 5px 10px;
+}
+
+/* Show dropdown when active */
+.profile-menu.active {
+    display: block;
+}
+
+.results-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.movie {
+    text-align: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.movie:hover {
+    transform: scale(1.05);
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.movie h3 {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #fff;
+}
+
+#loadMore {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loadMore:hover {
+    background-color: #cc2e2e;
+}
+
+.movie-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 20px;
+    scrollbar-width: none;
+}
+
+.movie-container::-webkit-scrollbar {
+    display: none;
+}
+
+.movie {
+    text-align: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 150px;
+    transition: transform 0.2s;
+}
+
+.movie:hover {
+    transform: scale(1.05);
+}
+
+.movie img {
+    width: 150px;
+    border-radius: 8px;
+}
+
+.movie h3 {
+    font-size: 14px;
+    margin: 10px 0;
+    color: #fff;
+}
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

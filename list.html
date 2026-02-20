@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Lists</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 250px;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    textarea {
+      resize: none;
+      height: 38px;
+    }
+
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+    }
+
+    .list-container {
+      margin-top: 20px;
+    }
+
+    .list-card {
+      background-color: #222;
+      padding: 15px;
+      margin: 10px auto;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .list-card h2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .movie-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .movie-item img {
+      width: 60px;
+      height: auto;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .movie-item a {
+      color: white;
+      text-decoration: underline;
+      margin-right: auto;
+    }
+
+    .remove-btn {
+      background-color: rgb(18, 17, 17);
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    /* ✅ Correctly placed back button style */
+    .back-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: red;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    
+    .back-icon:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back to Dashboard Button -->
+<a href="movies.html" class="back-icon">← Back to Dashboard</a>
+
+  <h1>My Custom Lists</h1>
+
+  <div class="form-row">
+    <input type="text" id="listName" placeholder="List Name" />
+    <textarea id="listDesc" placeholder="List Description"></textarea>
+    <button onclick="createList()">+ Add List</button>
+  </div>
+
+  <div class="list-container" id="listsContainer"></div>
+
+  <script>
+    const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
+    function getAllLists() {
+      return JSON.parse(localStorage.getItem("allLists")) || {};
+    }
+
+    function saveAllLists(data) {
+      localStorage.setItem("allLists", JSON.stringify(data));
+    }
+
+    function getListDescriptions() {
+      return JSON.parse(localStorage.getItem("listDescriptions")) || {};
+    }
+
+    function saveListDescriptions(data) {
+      localStorage.setItem("listDescriptions", JSON.stringify(data));
+    }
+
+    function createList() {
+      const name = document.getElementById("listName").value.trim();
+      const desc = document.getElementById("listDesc").value.trim();
+      if (!name) return alert("Please enter a list name.");
+
+      const allLists = getAllLists();
+      if (allLists[name]) {
+        alert("List name already exists.");
+        return;
+      }
+
+      allLists[name] = [];
+      saveAllLists(allLists);
+
+      const descs = getListDescriptions();
+      descs[name] = desc || "No description provided.";
+      saveListDescriptions(descs);
+
+      document.getElementById("listName").value = "";
+      document.getElementById("listDesc").value = "";
+      renderLists();
+    }
+
+    function deleteList(name) {
+      const confirmed = confirm(`Are you sure you want to permanently delete the '${name}' list and all of its contents?`);
+      if (!confirmed) return;
+    
+      const allLists = getAllLists();
+      const descs = getListDescriptions();
+    
+      delete allLists[name];
+      delete descs[name];
+    
+      saveAllLists(allLists);
+      saveListDescriptions(descs);
+      renderLists();
+    }
+    
+
+    function removeFromList(listName, movieId) {
+      const allLists = getAllLists();
+      if (!allLists[listName]) return;
+
+      allLists[listName] = allLists[listName].filter(item => item.id !== movieId);
+      saveAllLists(allLists);
+      renderLists();
+    }
+
+    async function fetchMovieDetails(id, type) {
+      const res = await fetch(`https://api.themoviedb.org/3/${type}/${id}?api_key=c4998c97074e6e5606b5d8b589888d6d`);
+      return await res.json();
+    }
+
+    async function renderLists() {
+      const allLists = getAllLists();
+      const listDescs = getListDescriptions();
+      const container = document.getElementById("listsContainer");
+      container.innerHTML = "";
+
+      const listNames = Object.keys(allLists);
+      if (listNames.length === 0) {
+        container.innerHTML = "<p>No lists yet. Start by creating one!</p>";
+        return;
+      }
+
+      for (const listName of listNames) {
+        const listItems = allLists[listName];
+        const description = listDescs[listName] || "No description provided.";
+
+        const div = document.createElement("div");
+        div.className = "list-card";
+        div.innerHTML = `
+          <h2>
+            ${listName}
+            <button class="remove-btn" onclick="deleteList('${listName}')">Delete List</button>
+          </h2>
+          <p>${description}</p>
+        `;
+
+        if (listItems.length === 0) {
+          div.innerHTML += "<p><em>No items yet.</em></p>";
+        } else {
+          for (const item of listItems) {
+            const movie = await fetchMovieDetails(item.id, item.type);
+            const title = movie.title || movie.name || "(Untitled)";
+            const poster = movie.poster_path ? `${IMAGE_URL}${movie.poster_path}` : "";
+
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "movie-item";
+            itemDiv.innerHTML = `
+              <img src="${poster}" alt="${title}">
+              <a href="movie-details.html?id=${item.id}&type=${item.type}" target="_blank">${title}</a>
+              <button class="remove-btn" onclick="removeFromList('${listName}', ${item.id})">❌</button>
+            `;
+            div.appendChild(itemDiv);
+          }
+        }
+
+        container.appendChild(div);
+      }
+    }
+
+    renderLists();
+  </script>
+</body>
+</html>
+

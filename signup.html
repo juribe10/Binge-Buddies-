@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Sign Up - Binge Buddies</title>
+</head>
+<body>
+    <header class="showcase">
+        <div class="showcase-top">
+            <img src="logo.jpg" alt="Binge Buddies Logo">
+            <a href="index.html" class="btn btn-rounded back-home-btn">Back to home</a>
+        </div>
+        <div class="showcase-content">
+            <h1>Join Binge Buddies</h1>
+            <h3>Create your account to start your binge-worthy adventure.</h3>
+
+            <form id="signup-form" method="POST" class="signup-form">
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn signup-btn">SIGN UP</button>
+            </form>
+        </div>
+    </header>
+
+    <script>
+        document.querySelector("#signup-form").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent default form submission
+    
+            const email = document.querySelector("#email").value.trim();
+    
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+    
+            try {
+                let response = await fetch("http://localhost:3000/signup", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: email })
+                });
+    
+                let result = await response.json();
+    
+                if (response.ok) {
+                    alert(result.message); // Show success message
+                    window.location.href = "index.html"; // ✅ Redirects to index.html instead of signin.html
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    </script>
+    
+    
+</body>
+</html>

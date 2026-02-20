@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Binge Buddies</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Your Dashboard</h1>
+        <input type="text" id="searchInput" placeholder="Search movies or TV shows">
+<button id="searchButton" class="btn">Search</button>
+
+        <!-- Profile Dropdown -->
+       <!-- Profile Dropdown -->
+<div class="profile-container">
+    <div class="profile-icon" onclick="toggleProfileMenu()">
+        <img src="logo.jpg" alt="Profile" class="profile-image" />
+      </div>      
+    <ul class="profile-menu" id="profileMenu">
+        <li><a href="watchlist.html">Watchlist</a></li>
+        <li><a href="list.html">Lists</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>      
+</div>
+
+    </header>
+            <nav>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">Movies</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" data-category="popular" data-type="movie">Popular</a></li>
+                                <li><a href="#" data-category="now_playing" data-type="movie">Now Playing</a></li>
+                                <li><a href="#" data-category="upcoming" data-type="movie">Upcoming</a></li>
+                                <li><a href="#" data-category="top_rated" data-type="movie">Top Rated</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">TV Shows</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" data-category="popular" data-type="tv">Popular</a></li>
+                                <li><a href="#" data-category="airing_today" data-type="tv">Airing Today</a></li>
+                                <li><a href="#" data-category="on_the_air" data-type="tv">On The Air</a></li>
+                                <li><a href="#" data-category="top_rated" data-type="tv">Top Rated</a></li>
+                            </ul>
+                        </li>
+                        <!-- Moved Watchlist and History Next to TV Shows -->
+                        <li><a href="watchlist.html">Watchlist</a></li>
+                        <li><a href="list.html">Lists</a></li>
+                        <li><a href="history.html">History</a></li>
+                    </ul>
+                </nav>
+                
+                
+                
+            </nav>
+           <main>
+    <!-- ✅ Category Results at the top -->
+    <section>
+        <h2>Category Results</h2>
+        <div id="category-results" class="movie-container"></div>
+    </section>
+    <section>
+        <h2>Trending Now</h2>
+        <div id="trending" class="movie-container"></div>
+    </section>
+
+    <section>
+        <h2>Latest Trailers</h2>
+        <div id="latest-trailers" class="movie-container"></div>
+    </section>
+
+    <section>
+        <h2>What's Popular</h2>
+        <div id="popular" class="movie-container"></div>
+    </section>
+</main>
+
+    <script src="movies.js"></script>
+</body>
+</html>

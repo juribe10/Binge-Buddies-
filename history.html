@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>History</title>
+  <link rel="stylesheet" href="watchlist.css" />
+</head>
+<body>
+  <a href="movies.html" class="back-icon">← Back to Dashboard</a>
+  <h1>Watch History</h1>
+  <div id="history-container"></div>
+
+  <script>
+    const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+    const API_KEY = "c4998c97074e6e5606b5d8b589888d6d";
+    const BASE_URL = "https://api.themoviedb.org/3";
+    const container = document.getElementById("history-container");
+
+    async function fetchDetails(id, type) {
+      const res = await fetch(`${BASE_URL}/${type}/${id}?api_key=${API_KEY}`);
+      return res.json();
+    }
+
+    async function loadHistory() {
+      const history = JSON.parse(localStorage.getItem("watchHistory")) || [];
+
+      if (history.length === 0) {
+        container.innerHTML = "<p>You haven't finished any shows or movies yet.</p>";
+        return;
+      }
+
+      for (const entry of history) {
+        const data = await fetchDetails(entry.id, entry.type);
+        const div = document.createElement("div");
+        div.className = "watchlist-card";
+        div.innerHTML = `
+          <img src="${IMAGE_URL + data.poster_path}" alt="${data.title || data.name}">
+          <div class="info">
+            <h3>${data.title || data.name}</h3>
+            <p><strong>Finished On:</strong> ${entry.finishedDate}</p>
+            <p>${data.overview}</p>
+          </div>
+        `;
+        container.appendChild(div);
+      }
+    }
+
+    loadHistory();
+  </script>
+</body>
+</html>

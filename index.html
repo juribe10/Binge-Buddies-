@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binge Buddies - Sign In</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="showcase">
+        <div class="showcase-top">
+            <img src="logo.jpg" alt="Binge Buddies Logo">
+            <!-- ✅ Fixed the Sign In button to correctly redirect -->
+            <a href="movies.html" class="btn btn-rounded sign-in-btn">Sign In</a>
+        </div>
+        <div class="showcase-content">
+            <h1>Binge Buddies</h1>
+            <h3>Unlock a universe of endless entertainment and unforgettable moments.</h3>
+            <p>Enter your email to start your binge-worthy adventure today.</p>
+
+            <!-- ✅ Fixed email input ID -->
+            <form id="signin-form" class="input">
+                <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+            </form>
+
+            <!-- Sign Up Button styled to match the Sign Up page -->
+            <a href="signup.html" class="btn signup-btn">Sign Up</a>
+        </div>
+    </header>
+
+    <script>
+        document.querySelector("#signin-form").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.querySelector("#email").value.trim();
+
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            try {
+                let response = await fetch("http://localhost:3000/signin", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: email })
+                });
+
+                let result = await response.json();
+
+                if (response.ok) {
+                    alert(result.message); // Show success message
+                    window.location.href = result.redirect; // ✅ Redirect to movies.html
+                } else {
+                    alert("Error: " + result.message);
+                }
+            } catch (error) {
+                console.error("Fetch error:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+

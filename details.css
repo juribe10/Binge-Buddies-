@@ -1,0 +1,149 @@
+/* Styling for main container */
+.movie-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Movie poster */
+.movie-poster img {
+    max-width: 350px;
+    border-radius: 10px;
+}
+
+/* Movie details */
+.movie-info {
+    flex: 1;
+    color: white;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px; /* Space between buttons and overview */
+}
+
+/* Buttons */
+button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 180px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: darkred;
+}
+
+/* Watch Trailer Button */
+#watch-trailer {
+    background-color: #0073e6;
+}
+
+#watch-trailer:hover {
+    background-color: #005bb5;
+}
+
+/* Overview */
+.overview-container {
+    padding: 15px;
+    background-color: #222;
+    border-radius: 10px;
+}
+
+.dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  #watchlist-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #d10000;
+    color: white;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    padding: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    width: 100%;
+  }
+  
+  #watchlist-dropdown option {
+    color: black;
+    background-color: white;
+  }
+
+
+  #list-dropdown{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #d10000;
+    color: white;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    padding: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    width: 100%;
+  }
+#list-dropdown option {
+    color: black;
+    background-color: white;
+}
+
+.back-banner {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #111;
+    padding: 10px 20px;
+    text-align: right;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+  }
+  
+  .back-banner {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: white; /* ← changed from #111 to white */
+    padding: 10px 20px;
+    text-align: right;
+    z-index: 1000;
+    border-bottom: 1px solid #ccc; /* optional: subtle separator */
+  }
+  
+  .back-banner a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: red;
+    border-radius: 5px;
+    transition: background 0.2s ease;
+  }
+  
+  .back-banner a:hover {
+    background-color: darkred;
+  }
+  
+  

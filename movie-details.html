@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="details.css" />
+  <script src="movie-details.js" defer></script>
+  <style>
+    .dropdown-watchlist select,
+    .dropdown-list select {
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #222;
+      color: white;
+      border: 1px solid #555;
+      margin-left: 10px;
+    }
+
+    .dropdown-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  
+ <!-- Sticky Banner -->
+<div class="back-banner">
+  <a href="movies.html">← Back to Dashboard</a>
+</div>
+
+
+  <div class="movie-container">
+    <!-- Movie Poster -->
+    <div class="movie-poster">
+      <img id="movie-poster" src="" alt="Movie Poster" />
+    </div>
+
+    <!-- Movie Details -->
+    <div class="movie-info">
+      <div id="streaming-links" style="margin-bottom: 10px;"></div>
+      <h1 id="movie-title">Loading...</h1>
+      <p id="tagline" class="tagline"></p>
+      <p><strong>Release Date:</strong> <span id="release-date">Loading...</span></p>
+      <p><strong>Rating:</strong> <span id="rating">Loading...</span></p>
+      <p><strong>Duration:</strong> <span id="duration">Loading...</span></p>
+      <p><strong>Genres:</strong> <span id="genres">Loading...</span></p>
+
+      <!-- Buttons above overview -->
+      <div class="button-container">
+        <!-- ✅ Watchlist -->
+        <div class="dropdown-wrapper">
+          <button id="add-watchlist" class="btn btn-danger">+ Add to Watchlist</button>
+          <select id="watchlist-dropdown" class="styled-dropdown"></select>
+        </div>
+
+        <!-- ✅ List -->
+        <!-- ✅ List Dropdown -->
+    <div class="dropdown-wrapper">
+      <button id="add-list" class="btn btn-danger">+ Add to List</button>
+      <select id="list-dropdown" class="styled-dropdown"></select>
+    </div>
+
+
+        <button id="watch-trailer" class="btn btn-primary">▶ Watch Trailer</button>
+      
+
+      </div>
+
+      <!-- Overview Section -->
+      <div class="overview-container">
+        <h2>Overview</h2>
+        <p id="overview">Loading...</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
